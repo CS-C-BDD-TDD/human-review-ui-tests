@@ -1,0 +1,7 @@
+Recording todos
+
+Users must be able to record tasks quickly and easily.
+
+Users must be able to see that tasks are active, which means not completed.
+
+Users should also be able to complete tasks, which would make the tasks inactive.
