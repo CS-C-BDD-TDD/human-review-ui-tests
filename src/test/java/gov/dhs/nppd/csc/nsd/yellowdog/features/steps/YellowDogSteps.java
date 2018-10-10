@@ -10,7 +10,6 @@ public class YellowDogSteps {
 	
 	@Given("^user enters \"([^\"]*)\" as username and \"([^\"]*)\" as password to sign in$")
 	public void navigate_to_application_and_signin(String username, String password) throws Throwable {
-		System.out.println("user name: "+username+"      password: "+password);
 		user.open_application();
 		user.perform_sign_in(username, password);
 	}
