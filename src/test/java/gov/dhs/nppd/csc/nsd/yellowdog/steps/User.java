@@ -9,11 +9,13 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import gov.dhs.nppd.csc.nsd.yellowdog.pages.HumanReviewPage;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.LoginPage;
 
 @SuppressWarnings("serial")
 public class User extends ScenarioSteps {
 	LoginPage loginPage;
+	HumanReviewPage hrPage;
 
 	private static Properties properties;
 	private static String propertyFile = "src/test/resources/config.properties";
@@ -52,6 +54,16 @@ public class User extends ScenarioSteps {
 		loginPage.signin(username, password);
 	}
 
+	@Step
+	public void verify_login_suceed() {
+		hrPage.check_for_pending_message();
+	}
+
+	@Step
+	public void verify_login_fail() {
+	//	loginPage.check_for_error_message();
+	}
+	
 //	@Step
 //	public void should_see_action_called(String action) {
 //		assertThat(loginPage.getActions()).contains(action);		

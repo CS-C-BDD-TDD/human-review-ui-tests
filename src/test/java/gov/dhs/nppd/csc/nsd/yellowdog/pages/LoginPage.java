@@ -7,19 +7,23 @@ import org.openqa.selenium.WebElement;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.core.annotations.findby.By;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class LoginPage extends PageObject {
 
+    @FindBy(xpath = "//input[@type='username']")
+    WebElement user;
+    @FindBy(xpath = "//input[@type='password']")
+    WebElement pwd;
+    @FindBy(xpath = "//button[@type='submit']")
+    WebElement signin;
+    @FindBy(xpath = "//i[contains(@class, 'fa-eye-slash')]")
+    WebElement eye;
+
 	public void signin(String username, String password) {
-		WebElement user = getDriver().findElement(By.xpath("//input[@type='username']"));
-		WebElement pwd = getDriver().findElement(By.xpath("//input[@type='password']"));
-		WebElement signin = getDriver().findElement(By.xpath("//button[@type='submit']"));
-						
 		user.sendKeys(username);
 		pwd.sendKeys(password);
 		if (! pwd.toString().isEmpty()) {
-			WebElement eye = getDriver().findElement(By.xpath("//i[contains(@class, 'fa-eye-slash')]"));
 			eye.click();
 		}
 		signin.click();
