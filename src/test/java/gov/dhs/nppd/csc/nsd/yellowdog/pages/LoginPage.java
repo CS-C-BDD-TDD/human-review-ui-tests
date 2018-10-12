@@ -1,5 +1,7 @@
 package gov.dhs.nppd.csc.nsd.yellowdog.pages;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,8 @@ public class LoginPage extends PageObject {
     WebElement signin;
     @FindBy(xpath = "//i[contains(@class, 'fa-eye-slash')]")
     WebElement eye;
+    @FindBy(id = "error")
+    WebElement err;
 
 	public void signin(String username, String password) {
 		user.sendKeys(username);
@@ -28,7 +32,11 @@ public class LoginPage extends PageObject {
 		}
 		signin.click();
 	}
-	
+
+	public void check_for_error_message() {
+
+	}
+
 	public List<String> getActions() {
 		return findAll(".view").stream().map(WebElementFacade::getText).collect(Collectors.toList());
 	}
