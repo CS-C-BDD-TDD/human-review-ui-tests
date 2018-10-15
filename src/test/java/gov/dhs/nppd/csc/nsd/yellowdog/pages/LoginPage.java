@@ -13,7 +13,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class LoginPage extends PageObject {
 
-    @FindBy(xpath = "//input[@type='username']")
+    @FindBy(xpath = "//input[@type='text']")
     WebElement user;
     @FindBy(xpath = "//input[@type='password']")
     WebElement pwd;
