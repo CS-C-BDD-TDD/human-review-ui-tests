@@ -17,3 +17,10 @@ Scenario Outline: Enter incorrect credentials on the Login page
     | User1     | WrongPassword |
     | WrongUser | Pass1         |
     | WrongUser | WrongPassword |
+    
+@Kiet_WIP
+Scenario: Enter correct credentials on the Login page (another version)
+	Given I am have a valid credential as "User1" and "Pass1"
+    When I access the application with that credentials
+    Then I should get access to the Human Review application
+    
