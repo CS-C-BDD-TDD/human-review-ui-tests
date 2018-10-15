@@ -22,6 +22,6 @@ public class YellowDogSteps {
 
 	@Then("^login should be unsuccessful$")
 	public void verify_login_failure() throws Throwable {
-		//user.verify_login_fail();
+		user.verify_login_fail();
 	}
 }

@@ -1,5 +1,5 @@
 @Login
-Feature: Login YellowDog app to do human-review
+Feature: Login YellowDog application
 	As an analyst I need to be able to enter my credentials and
 	sign in the YellowDog application in order to perform human reviews.
 

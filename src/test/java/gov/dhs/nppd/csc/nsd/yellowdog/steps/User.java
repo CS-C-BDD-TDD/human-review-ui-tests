@@ -61,7 +61,7 @@ public class User extends ScenarioSteps {
 
 	@Step
 	public void verify_login_fail() {
-	//	loginPage.check_for_error_message();
+		loginPage.check_for_error_message();
 	}
 	
 //	@Step
