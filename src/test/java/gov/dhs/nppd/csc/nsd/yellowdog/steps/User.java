@@ -2,7 +2,6 @@ package gov.dhs.nppd.csc.nsd.yellowdog.steps;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
