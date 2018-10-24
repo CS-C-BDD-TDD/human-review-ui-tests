@@ -1,4 +1,4 @@
-package gov.dhs.nppd.csc.nsd.yellowdog.features.steps;
+package gov.dhs.nppd.csc.nsd.yellowdog.cukes;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

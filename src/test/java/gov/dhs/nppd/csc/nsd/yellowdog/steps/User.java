@@ -11,7 +11,6 @@ import java.util.Properties;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.HumanReviewPage;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.LoginPage;
 
-@SuppressWarnings("serial")
 public class User extends ScenarioSteps {
 	LoginPage loginPage;
 	HumanReviewPage hrPage;
