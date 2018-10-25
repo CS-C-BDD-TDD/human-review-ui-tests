@@ -21,7 +21,7 @@ hr.pending.title=Pending Messages
 To run all tests, run this command:
 
 ```
-mvn -Dtest=RunCukesTest -Dwebdriver.driver=chrome -Dwebdriver.chrome.driver=/home/devsecops/dev/bin/drivers/chromedriver
+mvn -Dtest=RunCukesTest -Dwebdriver.driver=chrome -Dwebdriver.chrome.driver=/home/devsecops/dev/bin/drivers/chromedriver -Dcukes.config.file=config.properties test
 ```
 
 To generate a serenity report (`located at target/site/serenity/index.html`), run this command:
