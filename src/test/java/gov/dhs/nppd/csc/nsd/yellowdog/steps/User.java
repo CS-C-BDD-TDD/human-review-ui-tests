@@ -2,7 +2,6 @@ package gov.dhs.nppd.csc.nsd.yellowdog.steps;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,7 +11,6 @@ import java.util.Properties;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.HumanReviewPage;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.LoginPage;
 
-@SuppressWarnings("serial")
 public class User extends ScenarioSteps {
 	LoginPage loginPage;
 	HumanReviewPage hrPage;

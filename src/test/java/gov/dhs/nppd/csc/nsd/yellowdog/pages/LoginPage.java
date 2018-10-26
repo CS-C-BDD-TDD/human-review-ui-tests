@@ -1,10 +1,9 @@
 package gov.dhs.nppd.csc.nsd.yellowdog.pages;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.WebElement;
 
 import net.serenitybdd.core.pages.PageObject;
@@ -17,11 +16,11 @@ public class LoginPage extends PageObject {
     WebElement user;
     @FindBy(xpath = "//input[@type='password']")
     WebElement pwd;
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[@type='button']")
     WebElement signin;
     @FindBy(xpath = "//i[contains(@class, 'fa-eye-slash')]")
     WebElement eye;
-    @FindBy(id = "error")
+    @FindBy(xpath = "//q-alert")
     WebElement err;
 
 	public void signin(String username, String password) {
@@ -34,7 +33,7 @@ public class LoginPage extends PageObject {
 	}
 
 	public void check_for_error_message() {
-
+		//assertTrue(err.isDisplayed());
 	}
 
 	public List<String> getActions() {
