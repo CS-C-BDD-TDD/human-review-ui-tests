@@ -1,6 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>auto-test</groupId>
@@ -47,29 +46,46 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-core</artifactId>
 			<version>${serenity.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-junit</artifactId>
 			<version>${serenity.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-cucumber</artifactId>
 			<version>${serenity.cucumber.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
 			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>2.2.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>2.50.0</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -93,9 +109,9 @@
 						<include>**/jbehave/**/*.java</include>
 						<include>**/cucumber/*.java</include>
 					</includes>
-					<systemPropertyVariables>
+<!-- 					<systemPropertyVariables>
 						<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-					</systemPropertyVariables>
+					</systemPropertyVariables> -->
 					<excludes>
 						<exclude>**/*WithFailures.java</exclude>
 					</excludes>
