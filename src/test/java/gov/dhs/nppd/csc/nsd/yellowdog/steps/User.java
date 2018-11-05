@@ -1,10 +1,8 @@
 package gov.dhs.nppd.csc.nsd.yellowdog.steps;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +11,8 @@ import java.util.Properties;
 
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.HumanReviewPage;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.LoginPage;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 
 public class User extends ScenarioSteps {
 	LoginPage loginPage;
@@ -75,9 +75,25 @@ public class User extends ScenarioSteps {
 		assertThat(actualNumFields, equalTo(expectedNumFields));
 	}
 
-//	@Step
-//	public void should_see_action_called(String action) {
-//		assertThat(loginPage.getActions()).contains(action);		
-//	}
+	@Step
+	public int searches_row_that_has(String fieldName, String fieldValue) {
+		return hrPage.searchRowForFieldNameAndValue(fieldName, fieldValue);
+	}
+
+	@Step
+	public void found_row_that_has(int rowNumber4TargetedField, String fieldName, String fieldValue) {
+		// for readability only
+	}
+
+	@Step
+	public void redact_the_field(int rowNumberForTargetedField) {
+		hrPage.redact(rowNumberForTargetedField - 1);
+	}
+
+
+	@Step
+	public void edit_the_field(int rowNumberForTargetedField, String fieldValue) {
+		hrPage.edit(rowNumberForTargetedField - 1, fieldValue);
+	}
 
 }
