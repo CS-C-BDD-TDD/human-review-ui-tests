@@ -104,4 +104,9 @@ public class User extends ScenarioSteps {
 		hrPage.confirmRisk(rowNumberForTargetedField - 1, acceptedValue);
 	}
 
+	@Step
+	public void reverse_change() {
+		// Do nothing.
+	}
+
 }
