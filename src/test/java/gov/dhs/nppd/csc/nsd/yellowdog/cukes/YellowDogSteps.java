@@ -77,6 +77,23 @@ public class YellowDogSteps {
 		user.not_pii_the_field(rowNumber4TargetedField + 1, originalStixInfo.getAcceptedValue());
 	}
 
+	@When("^I Confirm Risk a field with the following information:$")
+	public void i_Confirm_Risk_a_field_with_the_following_information(List<StixInfo> stixInfoList) throws Exception {
+		originalStixInfo = stixInfoList.get(0);
+		user.click_on_stix_id_entry(originalStixInfo.getStixId());
+		rowNumber4TargetedField = user.searches_row_that_has(originalStixInfo.getFieldName(),
+				originalStixInfo.getFieldValue());
+
+		if (rowNumber4TargetedField < 0) {
+			throw new Exception(String.format("Unable to locate the row for the field name/value %s:%s",
+					originalStixInfo.getFieldName(), originalStixInfo.getFieldValue()));
+		}
+		
+		user.found_row_that_has(rowNumber4TargetedField + 1, originalStixInfo.getFieldName(),
+				originalStixInfo.getFieldValue());
+		
+		user.confirm_risk_the_field(rowNumber4TargetedField + 1, originalStixInfo.getAcceptedValue());
+	}
 
 
 	@Then("^I should have the field displayed as follows:$")

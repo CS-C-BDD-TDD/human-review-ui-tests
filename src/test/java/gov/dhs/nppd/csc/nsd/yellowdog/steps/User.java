@@ -2,7 +2,6 @@ package gov.dhs.nppd.csc.nsd.yellowdog.steps;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -98,6 +97,11 @@ public class User extends ScenarioSteps {
 	@Step
 	public void not_pii_the_field(int rowNumberForTargetedField, String acceptedValue) {
 		hrPage.notPii(rowNumberForTargetedField - 1, acceptedValue);
+	}
+
+	@Step
+	public void confirm_risk_the_field(int rowNumberForTargetedField, String acceptedValue) {
+		hrPage.confirmRisk(rowNumberForTargetedField - 1, acceptedValue);
 	}
 
 }
