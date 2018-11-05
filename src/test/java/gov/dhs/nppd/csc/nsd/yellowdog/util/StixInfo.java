@@ -3,6 +3,16 @@ package gov.dhs.nppd.csc.nsd.yellowdog.util;
 public class StixInfo {
 	private String stixId;
 	private String fieldName;
+	private String fieldValue;
+	private String acceptedValue;
+
+	public String getAcceptedValue() {
+		return acceptedValue;
+	}
+
+	public void setAcceptedValue(String acceptedValue) {
+		this.acceptedValue = acceptedValue;
+	}
 
 	public String getStixId() {
 		return stixId;
@@ -28,5 +38,4 @@ public class StixInfo {
 		this.fieldValue = fieldValue;
 	}
 
-	private String fieldValue;
 }

@@ -59,6 +59,26 @@ public class YellowDogSteps {
 		user.redact_the_field(rowNumber4TargetedField + 1);
 	}
 
+	@When("^I Not PII a field with the following information:$")
+	public void i_Not_PII_a_field_with_the_following_information(List<StixInfo> stixInfoList) throws Exception {
+		originalStixInfo = stixInfoList.get(0);
+		user.click_on_stix_id_entry(originalStixInfo.getStixId());
+		rowNumber4TargetedField = user.searches_row_that_has(originalStixInfo.getFieldName(),
+				originalStixInfo.getFieldValue());
+
+		if (rowNumber4TargetedField < 0) {
+			throw new Exception(String.format("Unable to locate the row for the field name/value %s:%s",
+					originalStixInfo.getFieldName(), originalStixInfo.getFieldValue()));
+		}
+		
+		user.found_row_that_has(rowNumber4TargetedField + 1, originalStixInfo.getFieldName(),
+				originalStixInfo.getFieldValue());
+		
+		user.not_pii_the_field(rowNumber4TargetedField + 1, originalStixInfo.getAcceptedValue());
+	}
+
+
+
 	@Then("^I should have the field displayed as follows:$")
 	public void i_should_have_the_field_displayed_as_follows(List<StixInfo> expectedStixInfoList) throws Exception {
 		StixInfo stixInfo = expectedStixInfoList.get(0);

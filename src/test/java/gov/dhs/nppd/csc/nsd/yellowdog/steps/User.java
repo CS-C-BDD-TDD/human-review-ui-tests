@@ -90,10 +90,14 @@ public class User extends ScenarioSteps {
 		hrPage.redact(rowNumberForTargetedField - 1);
 	}
 
-
 	@Step
 	public void edit_the_field(int rowNumberForTargetedField, String fieldValue) {
 		hrPage.edit(rowNumberForTargetedField - 1, fieldValue);
+	}
+
+	@Step
+	public void not_pii_the_field(int rowNumberForTargetedField, String acceptedValue) {
+		hrPage.notPii(rowNumberForTargetedField - 1, acceptedValue);
 	}
 
 }

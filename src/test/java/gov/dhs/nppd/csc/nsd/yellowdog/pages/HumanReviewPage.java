@@ -71,4 +71,13 @@ public class HumanReviewPage extends PageObject {
 		tds.get(5).findElement(By.xpath(".//input[@value='Edit']/../div")).click();
 	}
 
+	public void notPii(int i, String acceptedValue) {
+		WebElement tr = trs.get(i);
+		List<WebElement> tds = trs.get(i).findElements(By.xpath("td"));
+		WebElement fieldNameInput = tds.get(3).findElement(By.xpath(".//input"));
+		fieldNameInput.clear();
+		fieldNameInput.sendKeys(Keys.chord(Keys.CONTROL, "a"), acceptedValue);
+		tds.get(5).findElement(By.xpath(".//input[@value='Not PII']/../div")).click();
+	}
+
 }
