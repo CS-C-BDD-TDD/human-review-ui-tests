@@ -3,6 +3,9 @@ package gov.dhs.nppd.csc.nsd.yellowdog.steps;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,17 +24,16 @@ public class User extends ScenarioSteps {
 	public User() {
 		try {
 			loadProperties(propertyFile);
-		} catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		}
 	}
 
 	private void loadProperties(String file) throws FileNotFoundException {
 		properties = new Properties();
-	    InputStream is = new FileInputStream(file);
+		InputStream is = new FileInputStream(file);
 
-	    try {
+		try {
 			properties.load(is);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,12 +41,12 @@ public class User extends ScenarioSteps {
 	}
 
 	public Properties getSystemProperties() {
-	    return properties;
+		return properties;
 	}
 
 	@Step
 	public void open_application() {
-		loginPage.open();		
+		loginPage.open();
 	}
 
 	@Step
@@ -61,10 +63,21 @@ public class User extends ScenarioSteps {
 	public void verify_login_fail() {
 		loginPage.check_for_error_message();
 	}
-	
+
+	@Step
+	public void click_on_stix_id_entry(String stixId) {
+		hrPage.click_stix_id(stixId);
+	}
+
+	@Step
+	public void verify_number_of_expected_fields(int expectedNumFields) {
+		int actualNumFields = hrPage.getNumberOfFields();
+		assertThat(actualNumFields, equalTo(expectedNumFields));
+	}
+
 //	@Step
 //	public void should_see_action_called(String action) {
 //		assertThat(loginPage.getActions()).contains(action);		
 //	}
-	
+
 }

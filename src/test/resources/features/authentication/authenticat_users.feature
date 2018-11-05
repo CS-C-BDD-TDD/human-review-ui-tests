@@ -10,7 +10,7 @@ Scenario: Authenticate user to the Yellow Dog application
 	When I login to the website 
 	Then I should be presented with a list of pending human review items 
 	
-@Kiet_WIP 
+
 Scenario Outline: Reject invalid user login attempt 
 	Given I am a regular user of the Yellow Dog Application with an invalid credential as "<username>" and "<password>" 
 	When I login to the website
