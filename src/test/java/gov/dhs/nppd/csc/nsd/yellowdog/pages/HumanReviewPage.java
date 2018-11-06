@@ -16,6 +16,11 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
 public class HumanReviewPage extends PageObject {
+	private static final int ACTION_COLUMN = 5;
+	private static final String REDACT_TEMPLATE = ".//input[@value='Redact']/../div";
+	private static final String EDIT_TEMPLATE = ".//input[@value='Edit']/../div";
+	private static final String NOT_PII_TEMPLATE = ".//input[@value='Not PII']/../div";
+	private static final String CONFIRM_RISK_TEMPLATE = ".//input[@value='Confirm Risk']/../div";
 	private static final Logger logger = LoggerFactory.getLogger(HumanReviewPage.class);
 	private static String STIX_ENTRY_TEMPLATE = "//td[@class='monofont' and contains(text(),'%s')]";
 
@@ -56,37 +61,31 @@ public class HumanReviewPage extends PageObject {
 		return -1;
 	}
 
-	public void redact(int i) {
-		WebElement tr = trs.get(i);
-		List<WebElement> tds = trs.get(i).findElements(By.xpath("td"));
-		tds.get(5).findElement(By.xpath(".//input[@value='Redact']/../div")).click();
+	public void redact(int rowNo) {
+		WebElement tr = trs.get(rowNo);
+		List<WebElement> tds = trs.get(rowNo).findElements(By.xpath("td"));
+		tds.get(ACTION_COLUMN).findElement(By.xpath(REDACT_TEMPLATE)).click();
 	}
 
-	public void edit(int i, String fieldValue) {
-		WebElement tr = trs.get(i);
-		List<WebElement> tds = trs.get(i).findElements(By.xpath("td"));
+	public void edit(int rowNo, String fieldValue) {
+		takeAction(rowNo, fieldValue, EDIT_TEMPLATE);
+	}
+
+	private void takeAction(int rowNo, String fieldValue, String actionTemplate) {
+		WebElement tr = trs.get(rowNo);
+		List<WebElement> tds = trs.get(rowNo).findElements(By.xpath("td"));
 		WebElement fieldNameInput = tds.get(3).findElement(By.xpath(".//input"));
 		fieldNameInput.clear();
 		fieldNameInput.sendKeys(Keys.chord(Keys.CONTROL, "a"), fieldValue);
-		tds.get(5).findElement(By.xpath(".//input[@value='Edit']/../div")).click();
+		tds.get(ACTION_COLUMN).findElement(By.xpath(actionTemplate)).click();
 	}
 
-	public void notPii(int i, String acceptedValue) {
-		WebElement tr = trs.get(i);
-		List<WebElement> tds = trs.get(i).findElements(By.xpath("td"));
-		WebElement fieldNameInput = tds.get(3).findElement(By.xpath(".//input"));
-		fieldNameInput.clear();
-		fieldNameInput.sendKeys(Keys.chord(Keys.CONTROL, "a"), acceptedValue);
-		tds.get(5).findElement(By.xpath(".//input[@value='Not PII']/../div")).click();
+	public void notPii(int rowNo, String acceptedValue) {
+		takeAction(rowNo, acceptedValue, NOT_PII_TEMPLATE);
 	}
 
-	public void confirmRisk(int i, String acceptedValue) {
-		WebElement tr = trs.get(i);
-		List<WebElement> tds = trs.get(i).findElements(By.xpath("td"));
-		WebElement fieldNameInput = tds.get(3).findElement(By.xpath(".//input"));
-		fieldNameInput.clear();
-		fieldNameInput.sendKeys(Keys.chord(Keys.CONTROL, "a"), acceptedValue);
-		tds.get(5).findElement(By.xpath(".//input[@value='Confirm Risk']/../div")).click();
+	public void confirmRisk(int rowNo, String acceptedValue) {
+		takeAction(rowNo, acceptedValue, CONFIRM_RISK_TEMPLATE);
 	}
 
 }
