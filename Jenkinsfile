@@ -16,6 +16,8 @@ spec:
   - name: jenkins-slave-mvn
     image: docker-registry.default.svc:5000/labs-ci-cd/jenkins-slave-mvn
     tty: true
+    command:
+    - cat
     env:
     - name: MY_POD_IP
       valueFrom:
@@ -24,6 +26,8 @@ spec:
   - name: jenkins-slave-zap
     image: docker-registry.default.svc:5000/labs-ci-cd/jenkins-slave-zap
     tty: true
+    command:
+    - cat
     env:
     - name: MY_POD_IP
       valueFrom:
@@ -34,6 +38,7 @@ spec:
   }
   environment {
     POD_IP = ''
+    ZAP_BASELINE_SCAN_OUTPUT = ''
   }
   stages {
     stage('Get Pod IP') {
@@ -48,17 +53,34 @@ spec:
     stage('Run Acceptance Tests') {
       steps {
         sh '/usr/local/bin/generate_container_user'
-        sh 'rm -rf workdir'
-        sh 'git clone https://github.com/CS-C-BDD-TDD/human-review-ui-tests.git workdir'
-        dir('workdir') {
-          // sh 'git checkout origin/DHS-106_-_Support_running_acceptance_tests_in_pipeline -b DHS-106_-_Support_running_acceptance_tests_in_pipeline'
-          sh """/opt/rh/rh-maven33/root/usr/bin/mvn -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 \
-                                                    -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
-                                                    -Dtest=RunCukesTest \
-                                                    -Dwebdriver.remote.driver=chrome \
-                                                    -Dwebdriver.remote.os=LINUX \
-                                                    -Dwebdriver.remote.url=http://zalenium-zalenium.apps.domino.rht-labs.com/wd/hub \
-                                                    test"""
+        sh """/opt/rh/rh-maven33/root/usr/bin/mvn \
+                    -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 \
+                    -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
+                    -Dhr.regular.username=User1 \
+                    -Dhr.regular.password=Pass1 \
+                    -Dtest=RunCukesTest \
+                    -Dwebdriver.timeouts.implicitlywait=5000 \
+                    -Dcukes.config.file=config.properties \
+                    -Dwebdriver.remote.driver=chrome \
+                    -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-zalenium.apps.domino.rht-labs.com/wd/hub \
+                    clean test"""
+      }
+    }
+    stage('Run ZAProxy Baseline Spider Scan') {
+      steps {
+        container('jenkins-slave-zap') {
+          script {
+            sh 'mkdir -p zaproxy_reports'
+            sh 'touch zaproxy_reports/console_output.txt'
+            def retVal = sh(returnStatus: true, script: 'zap-baseline.py -m 1 -r zaproxy_reports/zaproxy-baseline-report.html -t http://vue-app-labs-test.apps.domino.rht-labs.com/ > zaproxy_reports/console_output.txt')
+            if (retVal != 0) {
+              def output = readFile('zaproxy_reports/console_output.txt').trim()
+              emailext body: "${output}", subject: 'Failed ZAP Scan', to: 'snayak@bcmcgroup.com; ncho@bcmcgroup.com'
+              error 'ZAProxy Scan Failure'
+            }
+
+            emailext attachmentsPattern: '**/*-report.html', body: "Please see attached report", subject: 'ZAP Baseline Scan Report', to: 'snayak@bcmcgroup.com; ncho@bcmcgroup.com'
+          }
         }
       }
     }
