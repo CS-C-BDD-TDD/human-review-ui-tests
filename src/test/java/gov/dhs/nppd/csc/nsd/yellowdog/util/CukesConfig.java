@@ -1,5 +1,7 @@
 package gov.dhs.nppd.csc.nsd.yellowdog.util;
 
+import java.io.File;
+
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
@@ -27,7 +29,6 @@ public class CukesConfig {
 		FileBasedConfigurationBuilder<FileBasedConfiguration> builder = new FileBasedConfigurationBuilder<FileBasedConfiguration>(
 				PropertiesConfiguration.class)
 						.configure((params.properties().setFileName(System.getProperty("cukes.config.file"))));
-
 		try {
 			config = builder.getConfiguration();
 		} catch (ConfigurationException e) {
