@@ -21,7 +21,7 @@ hr.pending.title=Pending Messages
 To run all tests, run this command:
 
 ```
-mvn -Dtest=RunCukesTest -Dwebdriver.driver=chrome -Dcukes.config.file=config.properties test
+mvn -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ -Dhr.regular.username=User1 -Dhr.regular.password=Pass1 -Dtest=RunCukesTest -Dwebdriver.remote.driver=chrome -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-zalenium.apps.domino.rht-labs.com/wd/hub -Dwebdriver.timeouts.implicitlywait=5000 -Dcukes.config.file=config.properties clean test
 ```
 
 To generate a serenity report (`located at target/site/serenity/index.html`), run this command:
