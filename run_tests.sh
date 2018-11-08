@@ -8,6 +8,6 @@ mvn \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
     -Dwebdriver.remote.driver=chrome \
-    -Dchrome.switches=\"--proxy-server=http://$1:8080\" \
+    -Dchrome.switches=\"--proxy-server=$1:8080\" \
     -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-labs-ci-cd.apps.domino.rht-labs.com/wd/hub \
     clean test
