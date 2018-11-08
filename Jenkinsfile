@@ -64,6 +64,15 @@ spec:
                     -Dwebdriver.remote.driver=chrome \
                     -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-zalenium.apps.domino.rht-labs.com/wd/hub \
                     clean test"""
+        sh """/opt/rh/rh-maven33/root/usr/bin/mvn -DskipTests verify"""
+        publishHTML(target: [
+                          reportDir             : 'target/site/serenity',
+                          reportFiles           : 'index.html',
+                          reportName            : 'AA Test Report',
+                          keepAll               : true,
+                          alwaysLinkToLastBuild : true,
+                          allowMissing          : true
+                      ])
       }
     }
     stage('Run ZAProxy Baseline Spider Scan') {
