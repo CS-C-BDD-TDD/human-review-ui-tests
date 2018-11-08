@@ -9,5 +9,5 @@ mvn \
     -Dcukes.config.file=config.properties \
     -Dwebdriver.remote.driver=chrome \
     -Dchrome.switches=\"--proxy-server=http://$1:8080\" \
-    -Dwebdriver.remote.url=http://zalenium:zalenium1234zalenium-labs-ci-cd.apps.domino.rht-labs.com/wd/hub \
+    -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-labs-ci-cd.apps.domino.rht-labs.com/wd/hub \
     clean test
