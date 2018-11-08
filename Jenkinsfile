@@ -52,8 +52,9 @@ spec:
     }
     stage('Run Acceptance Tests') {
       steps {
-        sh '/usr/local/bin/generate_container_user'
-        sh """/opt/rh/rh-maven33/root/usr/bin/mvn \
+      	script {
+          sh '/usr/local/bin/generate_container_user'
+          def retVal = sh(returnStatus: true, script: 'opt/rh/rh-maven33/root/usr/bin/mvn \
                     -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 \
                     -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
                     -Dhr.regular.username=User1 \
@@ -63,7 +64,19 @@ spec:
                     -Dcukes.config.file=config.properties \
                     -Dwebdriver.remote.driver=chrome \
                     -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-zalenium.apps.domino.rht-labs.com/wd/hub \
-                    clean test"""
+                    clean test')
+          sh """/opt/rh/rh-maven33/root/usr/bin/mvn -DskipTests verify"""
+          publishHTML(target: [
+                      	reportDir             : 'target/site/serenity',
+                        reportFiles           : 'index.html',
+                        reportName            : 'AA Test Report',
+                        keepAll               : true,
+                        alwaysLinkToLastBuild : true,
+                        allowMissing          : true
+          ])
+          
+      	}
+
       }
     }
     stage('Run ZAProxy Baseline Spider Scan') {
