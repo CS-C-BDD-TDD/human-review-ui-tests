@@ -5,7 +5,7 @@ mvn \
     -Dhr.regular.username=User1 \
     -Dhr.regular.password=Pass1 \
     -Dtest=RunCukesTest \
-    -Dwebdriver.timeouts.implicitlywait=10000 \
+    -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
     -Dwebdriver.remote.driver=chrome \
     -Dchrome.switches=\"--proxy-server=http://$1:8080\" \
