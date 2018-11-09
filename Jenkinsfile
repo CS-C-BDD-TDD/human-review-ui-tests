@@ -36,22 +36,22 @@ spec:
       - name: REGULAR_USERNAME
         valueFrom:
           secretKeyRef:
-            name: build_secrets
+            name: build-secrets
             key: regular_username
       - name: REGULAR_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: build_secrets
+            name: build-secrets
             key: regular_password
       - name: REST_API_URL
           valueFrom:
             configMapKeyRef:
-              name: build_config
+              name: build-config
               key: rest_api_url
       - name: FRONTEND_URL
           valueFrom:
             configMapKeyRef:
-              name: build_config
+              name: build-config
               key: frontend_url
   - name: jenkins-slave-zap
     image: docker-registry.default.svc:5000/labs-ci-cd/jenkins-slave-zap
