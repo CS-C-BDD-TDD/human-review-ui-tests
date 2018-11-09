@@ -94,6 +94,21 @@
 				<configuration>
 					<skip>false</skip>
 				</configuration>
+				<executions>
+					<execution>
+						<id>jenkins</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
