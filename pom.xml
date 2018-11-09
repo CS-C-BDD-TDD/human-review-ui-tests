@@ -134,12 +134,23 @@
 							<goal>verify</goal>
 						</goals>
 						<configuration>
+							<includes>
+								<include>**/features/**/*.java</include>
+								<include>**/jbehave/**/*.java</include>
+								<include>**/cucumber/*.java</include>
+							</includes>
+							<excludes>
+								<exclude>**/*WithFailures.java</exclude>
+							</excludes>
+							<parallel>classes</parallel>
+							<threadCount>${parallel.tests}</threadCount>
+							<forkCount>${parallel.tests}</forkCount>
 							<systemPropertyVariables>
 								<hr.restapi.url>${env.REST_API_URL}</hr.restapi.url>
 								<hr.website.url>${env.FRONTEND_URL}</hr.website.url>
 								<hr.regular.username>${env.REGULAR_USERNAME}</hr.regular.username>
 								<hr.regular.password>${env.REGULAR_PASSWORD}</hr.regular.password>
-								<test>RunCuckesTest</test>
+								<test>RunCukesTest</test>
 								<webdriver.timeouts.implicitlywait>15000</webdriver.timeouts.implicitlywait>
 								<cukes.config.file>config.properties</cukes.config.file>
 								<webdriver.remote.driver>chrome</webdriver.remote.driver>
