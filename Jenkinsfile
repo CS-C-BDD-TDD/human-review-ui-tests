@@ -95,7 +95,7 @@ spec:
 
           // Execute the maven command to run Selenium/Serenity tests using CI settings for 
           // Jenkins/OpenShift environment
-          def retVal = sh(returnStatus: true, script: "export ZAPROXY_HOST=${localIP}; mvn clean test@jenkins")
+          def retVal = sh(returnStatus: true, script: "export ZAPROXY_HOST=${localIP}; /opt/rh/rh-maven33/root/usr/bin/mvn clean test@jenkins")
 
           // Capture the ZAProxy HTML report - MUST use OTHER prefix
           sh "curl -v -o /tmp/reports/zap-passive-report.html http://localhost:8080/OTHER/core/other/htmlreport"
