@@ -19,6 +19,8 @@ spec:
   volumes:
   - name: reports-storage
     emptyDir: {}
+  - name: mvn-cache
+    emptyDir: {}
   - name: maven-settings
     configMap:
       name: maven-settings
@@ -30,6 +32,8 @@ spec:
       mountPath: /tmp/reports
     - name: maven-settings
       mountPath: /home/jenkins/.m2
+    - name: mvn-cache
+      mountPath: /home/jenkins/.m2/repository
     tty: true
     command:
     - cat
