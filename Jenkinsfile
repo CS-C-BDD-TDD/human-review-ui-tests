@@ -33,6 +33,26 @@ spec:
       valueFrom:
         fieldRef:
           fieldPath: status.podIP
+      - name: REGULAR_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: build_secrets
+            key: regular_username
+      - name: REGULAR_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: build_secrets
+            key: regular_password
+      - name: REST_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: build_config
+              key: rest_api_url
+      - name: FRONTEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: build_config
+              key: frontend_url
   - name: jenkins-slave-zap
     image: docker-registry.default.svc:5000/labs-ci-cd/jenkins-slave-zap
     volumeMounts:
@@ -48,10 +68,6 @@ spec:
           fieldPath: status.podIP
 """
     }
-  }
-  environment {
-    POD_IP = ''
-    ZAP_BASELINE_SCAN_OUTPUT = ''
   }
   stages {
     stage('Start Zed Attack Proxy') {
@@ -77,8 +93,9 @@ spec:
             sh 'curl -v http://localhost:8080/JSON/core/view/mode'
           }
 
-          // Execute the maven command to run Selenium/Serenity tests
-          def retVal = sh(returnStatus: true, script: "./run_tests.sh ${localIP}")
+          // Execute the maven command to run Selenium/Serenity tests using CI settings for 
+          // Jenkins/OpenShift environment
+          def retVal = sh(returnStatus: true, script: "export ZAPROXY_HOST=${localIP}; mvn clean test@jenkins")
 
           // Capture the ZAProxy HTML report - MUST use OTHER prefix
           sh "curl -v -o /tmp/reports/zap-passive-report.html http://localhost:8080/OTHER/core/other/htmlreport"
