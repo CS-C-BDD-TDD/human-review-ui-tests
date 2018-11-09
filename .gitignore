@@ -31,6 +31,7 @@ bin
 ## IntelliJ
 .idea
 .idea/**
+auto-test.iml
 
 ## VSCode
 .vscode
