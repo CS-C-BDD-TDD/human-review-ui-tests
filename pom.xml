@@ -160,7 +160,7 @@
 							<parallel>classes</parallel>
 							<threadCount>${parallel.tests}</threadCount>
 							<forkCount>${parallel.tests}</forkCount>
-							<systemPropertyVariables>
+							<properties>
 								<hr.restapi.url>${env.REST_API_URL}</hr.restapi.url>
 								<hr.website.url>${env.FRONTEND_URL}</hr.website.url>
 								<hr.regular.username>${env.REGULAR_USERNAME}</hr.regular.username>
@@ -171,7 +171,7 @@
 								<webdriver.remote.driver>chrome</webdriver.remote.driver>
 								<webdriver.remote.url>http://zalenium:zalenium1234@zalenium:4444/wd/hub</webdriver.remote.url>
 								<chrome.switches>--proxy-server=${env.ZAPROXY_HOST}:8080</chrome.switches>
-							</systemPropertyVariables>
+							</properties>
 						</configuration>
 					</execution>
 				</executions>
