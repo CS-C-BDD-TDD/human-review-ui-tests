@@ -26,3 +26,13 @@ hs_err_pid*
 .settings
 target
 bin
+
+
+## IntelliJ
+.idea
+.idea/**
+
+## VSCode
+.vscode
+.vscode/**
+.factorypath
