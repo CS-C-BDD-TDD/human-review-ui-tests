@@ -19,12 +19,17 @@ spec:
   volumes:
   - name: reports-storage
     emptyDir: {}
+  - name: maven-settings
+    configMap:
+      name: maven-settings
   containers:
   - name: jenkins-slave-mvn
     image: docker-registry.default.svc:5000/labs-ci-cd/jenkins-slave-mvn
     volumeMounts:
     - name: reports-storage
       mountPath: /tmp/reports
+    - name: maven-settings
+      mountPath: /home/jenkins/.m2
     tty: true
     command:
     - cat
