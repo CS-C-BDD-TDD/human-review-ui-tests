@@ -135,32 +135,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.18.1</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                                <configuration>
-                                    <systemPropertyVariables>
-                                        <hr.restapi.url>${env.REST_API_URL}</hr.restapi.url>
-                                        <hr.website.url>${env.FRONTEND_URL}</hr.website.url>
-                                        <hr.regular.username>${env.REGULAR_USERNAME}</hr.regular.username>
-                                        <hr.regular.password>${env.REGULAR_PASSWORD}</hr.regular.password>
-                                        <test>RunCukesTest</test>
-                                        <webdriver.timeouts.implicitlywait>15000</webdriver.timeouts.implicitlywait>
-                                        <cukes.config.file>config.properties</cukes.config.file>
-                                        <webdriver.remote.driver>chrome</webdriver.remote.driver>
-                                        <webdriver.remote.url>http://zalenium:zalenium1234@${env.SELENIUM_HUB}/wd/hub</webdriver.remote.url>
-                                        <chrome.switches>--proxy-server=${env.ZAPROXY_HOST}:8080</chrome.switches>
-                                    </systemPropertyVariables>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
             <properties>
