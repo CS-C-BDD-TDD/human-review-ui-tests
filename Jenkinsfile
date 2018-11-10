@@ -79,6 +79,7 @@ spec:
       mountPath: /tmp/reports
     tty: true
     command:
+    - run-jnlp-client
     - zap.sh 
     - '-daemon' 
     - '-host'
