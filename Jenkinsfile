@@ -79,7 +79,6 @@ spec:
       mountPath: /tmp/reports
     tty: true
     command:
-    - uid_entrypoint.sh
     - zap.sh 
     - '-daemon' 
     - '-host'
