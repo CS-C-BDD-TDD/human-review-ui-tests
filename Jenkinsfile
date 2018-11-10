@@ -52,6 +52,16 @@ spec:
         secretKeyRef:
           name: build-secrets
           key: regular_password
+    - name: SELENIUM_GRID_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: zalenium
+          key: zalenium-user
+    - name: SELENIUM_GRID_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: zalenium
+          key: zalenium-password
     - name: REST_API_URL
       valueFrom:
         configMapKeyRef:
