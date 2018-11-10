@@ -79,7 +79,7 @@ spec:
       mountPath: /tmp/reports
     tty: true
     command:
-    - run-jnlp-client
+    - uid_entrypoint.sh
     - zap.sh 
     - '-daemon' 
     - '-host'
