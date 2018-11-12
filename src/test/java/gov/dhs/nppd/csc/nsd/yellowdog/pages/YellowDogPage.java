@@ -20,7 +20,7 @@ public class YellowDogPage extends PageObject {
 	private WebElement loginDenialErrorLabel;
 
 	public void visit(String websiteUrl) {
-		getDriver().manage().window().maximize();
+//		getDriver().manage().window().maximize();
 		this.openAt(websiteUrl);
 	}
 

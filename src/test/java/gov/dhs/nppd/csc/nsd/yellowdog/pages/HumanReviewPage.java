@@ -2,6 +2,7 @@ package gov.dhs.nppd.csc.nsd.yellowdog.pages;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import gov.dhs.nppd.csc.nsd.yellowdog.util.HumanReviewItem;
 import gov.dhs.nppd.csc.nsd.yellowdog.util.StixInfo;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
@@ -35,7 +37,8 @@ public class HumanReviewPage extends PageObject {
 	}
 
 	public List<String> getActions() {
-		return findAll(".view").stream().map(WebElementFacade::getText).collect(Collectors.toList());
+		return findAll(".view").stream().map(WebElementFacade::getText)
+				.collect(Collectors.toList());
 	}
 
 	public void click_stix_id(String stixId) {
@@ -53,13 +56,15 @@ public class HumanReviewPage extends PageObject {
 	public int searchRowForFieldNameAndValue(StixInfo stixInfo) {
 		String xpath = String.format("//td[contains(text(),'%s')]", stixInfo.getStixId());
 		tds = getDriver().findElements(By.xpath(xpath));
-		logger.info(String.format("expected: %s:%s", stixInfo.getFieldName(), stixInfo.getFieldValue()));
+		logger.info(String.format("expected: %s:%s", stixInfo.getFieldName(),
+				stixInfo.getFieldValue()));
 
 		for (int i = 0; i < tds.size(); i++) {
 			WebElement td = tds.get(i);
 			WebElement fieldNameEl = td.findElement(By.xpath("../td[4]"));
 			WebElement fieldValueEl = td.findElement(By.xpath("../td[5]"));
-			logger.info(String.format("actual: %s:%s", fieldNameEl.getText(), fieldValueEl.getText()));
+			logger.info(
+					String.format("actual: %s:%s", fieldNameEl.getText(), fieldValueEl.getText()));
 			if (fieldNameEl.getText().equals(stixInfo.getFieldName())
 					&& fieldValueEl.getText().equals(stixInfo.getFieldValue())) {
 				return i;
@@ -72,7 +77,8 @@ public class HumanReviewPage extends PageObject {
 		WebElement td = tds.get(rowNo);
 		WebElement actionSelector = td.findElement(By.xpath("../td[7]//i"));
 		actionSelector.click();
-		getDriver().findElement(By.xpath("//div[@tabindex='-1']//div[contains(text(),'Redact')]")).click();
+		getDriver().findElement(By.xpath("//div[@tabindex='-1']//div[contains(text(),'Redact')]"))
+				.click();
 	}
 
 	public void edit(int rowNo, String fieldValue) {
@@ -107,14 +113,18 @@ public class HumanReviewPage extends PageObject {
 		WebElement td = tds.get(rowNo);
 		WebElement actionSelector = td.findElement(By.xpath("../td[7]//i"));
 		actionSelector.click();
-		getDriver().findElement(By.xpath("//div[@tabindex='-1']//div[contains(text(),'Not PII')]")).click();
+		getDriver().findElement(By.xpath("//div[@tabindex='-1']//div[contains(text(),'Not PII')]"))
+				.click();
 	}
 
 	public void confirmRisk(int rowNo, String acceptedValue) {
 		WebElement td = tds.get(rowNo);
 		WebElement actionSelector = td.findElement(By.xpath("../td[7]//i"));
 		actionSelector.click();
-		getDriver().findElement(By.xpath("//div[@tabindex='-1']//div[contains(text(),'Confirm Risk')]")).click();
+		getDriver()
+				.findElement(
+						By.xpath("//div[@tabindex='-1']//div[contains(text(),'Confirm Risk')]"))
+				.click();
 	}
 
 	@FindBy(xpath = "//span[text()='Records per page:']/..//i")
@@ -128,10 +138,67 @@ public class HumanReviewPage extends PageObject {
 		selectDisplayAll.click();
 	}
 
-	@FindBy(xpath = "//td[text()='4fa1581e-74a5-40d7-a7f2-8b3424983de4']/../td[7]//i")
-	private WebElement actionsSelector;
-
 	public String getHrFieldStatus(int rowNo) {
 		return tds.get(rowNo).findElement(By.xpath("../td[6]")).getText();
+	}
+
+	public int searchRowForFieldNam(String stixId, String fieldName) {
+
+		String xpath = String.format("//td[contains(text(),'%s')]", stixId);
+		tds = getDriver().findElements(By.xpath(xpath));
+		logger.info(String.format("expected: %s", fieldName));
+
+		for (int i = 0; i < tds.size(); i++) {
+			WebElement td = tds.get(i);
+			WebElement fieldNameEl = td.findElement(By.xpath("../td[4]"));
+			logger.info(String.format("actual: %s", fieldNameEl.getText()));
+			if (fieldNameEl.getText().equals(fieldName)) {
+				return i;
+			}
+		}
+		return -1;
+
+	}
+
+	public List<Integer> searchNewRows(String stixId) {
+		List<Integer> numNewRows = new ArrayList<Integer>();
+
+		String xpath = String.format("//td[contains(text(),'%s')]", stixId);
+		tds = getDriver().findElements(By.xpath(xpath));
+		logger.info(String.format("stixId: %s", stixId));
+
+		for (int i = 0; i < tds.size(); i++) {
+			WebElement td = tds.get(i);
+			WebElement statusEl = td.findElement(By.xpath("../td[6]"));
+			logger.info(String.format("actual: %s", statusEl.getText()));
+			if (statusEl.getText().equals("New")) {
+				numNewRows.add(i);
+			}
+		}
+		return numNewRows;
+	}
+
+	private static final String GROUP_ACTION_TEMPLATE = "//td[contains(text(),'%s')]/..//div[contains(text(),'%s')]";
+
+	public void clickDisseminateButton(String stixId) {
+		String xpath = String.format(GROUP_ACTION_TEMPLATE, stixId, "Disseminate");
+		getDriver().findElements(By.xpath(xpath)).get(0).click();
+	}
+
+	public List<HumanReviewItem> getHrFields(String stixId) {
+		List<HumanReviewItem> hrItems = new ArrayList<HumanReviewItem>();
+		String xpath = String.format("//td[contains(text(),'%s')]", stixId);
+
+		List<WebElement> tds = getDriver().findElements(By.xpath(xpath));
+		tds.stream().forEach(td -> {
+			HumanReviewItem hrItem = new HumanReviewItem();
+			hrItem.setStixId(stixId);
+			hrItem.setFieldName(td.findElement(By.xpath("../td[4]")).getText());
+			hrItem.setFieldValue(td.findElement(By.xpath("../td[5]")).getText());
+			hrItem.setStatus(td.findElement(By.xpath("../td[6]")).getText());
+			hrItems.add(hrItem);
+		});
+
+		return hrItems;
 	}
 }

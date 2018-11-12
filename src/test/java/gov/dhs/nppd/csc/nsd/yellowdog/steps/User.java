@@ -6,10 +6,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.HumanReviewPage;
 import gov.dhs.nppd.csc.nsd.yellowdog.pages.LoginPage;
+import gov.dhs.nppd.csc.nsd.yellowdog.util.HumanReviewItem;
 import gov.dhs.nppd.csc.nsd.yellowdog.util.StixInfo;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
@@ -120,5 +122,35 @@ public class User extends ScenarioSteps {
 		return hrPage.getHrFieldStatus(rowNo);
 	}
 
+	@Step
+	public int searches_row_that_has(String stixId, String fieldName) {
+		return hrPage.searchRowForFieldNam(stixId, fieldName);
+	}
+
+	@Step
+	public void found_row_that_has(int i, String fieldName) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Step
+	public List<Integer> search_rows_with_new_status(String stixId) {
+		return hrPage.searchNewRows(stixId);
+	}
+
+	@Step
+	public void clicks_dissemination_button_for_the_document(String stixId) {
+		hrPage.clickDisseminateButton(stixId);
+	}
+
+	@Step
+	public int gets_number_of_fields(String stixId) {
+		return hrPage.getNumberOfFields(stixId);
+	}
+
+	@Step
+	public List<HumanReviewItem> gets_hr_fields(String stixId) {
+		return hrPage.getHrFields(stixId);
+	}
 
 }
