@@ -8,6 +8,5 @@ mvn \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
     -Dwebdriver.remote.driver=chrome \
-    -Dchrome.switches=\"--proxy-server=${ZAPROXY_HOST}:8080\" \
     -Dwebdriver.remote.url=http://${SELENIUM_GRID_USERNAME}:${SELENIUM_GRID_PASSWORD}@${SELENIUM_GRID_HOST}/wd/hub \
     clean test
