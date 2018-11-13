@@ -57,4 +57,3 @@ Scenario: Edit a field
 	Then the modified fields should be as follows: 
 		| field name | field value          | status |
 		| name       | *** Edited value *** | Edited |
-		

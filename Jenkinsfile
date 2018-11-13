@@ -55,6 +55,7 @@ spec:
       	script {
           sh '/usr/local/bin/generate_container_user'
           def retVal = sh(returnStatus: true, script: 'opt/rh/rh-maven33/root/usr/bin/mvn \
+          			-Dhr.partnerapi.url=http://hr-partner-labs-test.apps.domino.rht-labs.com/api/v1 \
                     -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 \
                     -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
                     -Dhr.regular.username=User1 \
@@ -77,24 +78,6 @@ spec:
           
       	}
 
-      }
-    }
-    stage('Run ZAProxy Baseline Spider Scan') {
-      steps {
-        container('jenkins-slave-zap') {
-          script {
-            sh 'mkdir -p zaproxy_reports'
-            sh 'touch zaproxy_reports/console_output.txt'
-            def retVal = sh(returnStatus: true, script: 'zap-baseline.py -m 1 -r zaproxy_reports/zaproxy-baseline-report.html -t http://vue-app-labs-test.apps.domino.rht-labs.com/ > zaproxy_reports/console_output.txt')
-            if (retVal != 0) {
-              def output = readFile('zaproxy_reports/console_output.txt').trim()
-              emailext body: "${output}", subject: 'Failed ZAP Scan', to: 'snayak@bcmcgroup.com; ncho@bcmcgroup.com'
-              error 'ZAProxy Scan Failure'
-            }
-
-            emailext attachmentsPattern: '**/*-report.html', body: "Please see attached report", subject: 'ZAP Baseline Scan Report', to: 'snayak@bcmcgroup.com; ncho@bcmcgroup.com'
-          }
-        }
       }
     }
   }
