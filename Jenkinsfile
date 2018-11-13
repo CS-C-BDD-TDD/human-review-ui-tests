@@ -54,7 +54,7 @@ spec:
       steps {
       	script {
           sh '/usr/local/bin/generate_container_user'
-          def retVal = sh(returnStatus: true, script: 'opt/rh/rh-maven33/root/usr/bin/mvn \
+          def retVal = sh(returnStatus: true, script: '/opt/rh/rh-maven33/root/usr/bin/mvn \
           			-Dhr.partnerapi.url=http://hr-partner-labs-test.apps.domino.rht-labs.com/api/v1 \
                     -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 \
                     -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
