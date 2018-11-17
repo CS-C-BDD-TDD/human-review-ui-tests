@@ -64,7 +64,7 @@ spec:
                     -Dwebdriver.timeouts.implicitlywait=5000 \
                     -Dcukes.config.file=config.properties \
                     -Dwebdriver.remote.driver=chrome \
-                    -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-zalenium.apps.domino.rht-labs.com/wd/hub \
+                    -Dwebdriver.remote.url=http://selenium-hub-labs-test.apps.domino.rht-labs.com/wd/hub \
                     clean test')
           sh """/opt/rh/rh-maven33/root/usr/bin/mvn -DskipTests verify"""
           publishHTML(target: [
