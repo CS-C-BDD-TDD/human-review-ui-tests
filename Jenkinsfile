@@ -69,7 +69,18 @@ spec:
       mountPath: /tmp/reports
     tty: true
     command:
-    - cat
+    - zap.sh
+    - '-daemon'
+    - '-host'
+    - 0.0.0.0
+    - '-port' 
+    - 8080 
+    - '-config' 
+    - 'api.disablekey=true'
+    - '-config' 
+    - 'api.addrs.addr.regex=true'
+    - '-config'
+    - 'api.addrs.addr.name=.*'
     env:
     - name: MY_POD_IP
       valueFrom:
