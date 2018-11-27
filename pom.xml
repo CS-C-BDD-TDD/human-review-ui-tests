@@ -158,7 +158,7 @@
                                     <goal>test</goal>
                                 </goals>
                                 <configuration>
-                                    <argLine>-Dhr.restapi.url=${REST_API_URL} -Dhr.website.url=${FRONTEND_URL} -Dhr.regular.username=${env.REGULAR_PASSWORD} -Dhr.regular.password=${env.REGULAR_USERNAME} -Dtest=RunCukesTest -Dwebdriver.remote.driver=chrome -Dwebdriver.remote.url=http://zalenium:zalenium1234@${env.SELENIUM_HUB}/wd/hub -Dchrome.switches="--proxy-server=http:${ZAPROXY_HOST}:8080" -Dwebdriver.timeouts.implicitlywait=5000 -Dcukes.config.file=config.properties</argLine>
+                                    <argLine>-Dhr.restapi.url=${REST_API_URL} -Dhr.website.url=${FRONTEND_URL} -Dhr.regular.username=${env.REGULAR_PASSWORD} -Dhr.regular.password=${env.REGULAR_USERNAME} -Dtest=RunCukesTest -Dwebdriver.remote.driver=chrome -Dwebdriver.remote.url=http://selenium-hub:4444/wd/hub -Dchrome.switches="--proxy-server=http:${ZAPROXY_HOST}:8080" -Dwebdriver.timeouts.implicitlywait=5000 -Dcukes.config.file=config.properties</argLine>
                                 </configuration>
                             </execution>
                         </executions>
