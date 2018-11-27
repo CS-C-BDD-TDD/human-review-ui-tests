@@ -60,6 +60,7 @@ spec:
                     -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
                     -Dhr.regular.username=User1 \
                     -Dhr.regular.password=Pass1 \
+                    -Dhr.webdriver.maxpage=yes \
                     -Dtest=RunCukesTest \
                     -Dwebdriver.timeouts.implicitlywait=5000 \
                     -Dcukes.config.file=config.properties \
