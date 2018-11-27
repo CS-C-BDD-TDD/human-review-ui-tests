@@ -6,7 +6,7 @@ Feature: Human-review features
 Background: 
 	Given I am a regular user of the Yellow Dog Application with a valid credential 
 	
-@Kiet_WIP 
+
 Scenario: Disseminating a redacted field. 
 	Given I submit a STIX document to Yellow Dog "/stix_docs/identifying_threat_actor_profile.json" 
 	And I login to the website 

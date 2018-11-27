@@ -6,8 +6,9 @@ Feature: Human-review features
 
 Background: 
 	Given I submit a STIX document to Yellow Dog "/stix_docs/identifying_threat_actor_profile.json" 
-	Given I am a regular user of the Yellow Dog Application with a valid credential 
-	
+	And I am a regular user of the Yellow Dog Application with a valid credential 
+
+@Kiet_WIP	
 Scenario: List of fields 
 	Given I login to the website 
 	When I look for all human review fields for a STIX document 
