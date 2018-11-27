@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 mvn \
-    -Dhr.restapi.url=http://human-review-backend-labs-test.apps.domino.rht-labs.com/api/v1 \
-    -Dhr.website.url=http://vue-app-labs-test.apps.domino.rht-labs.com/ \
-    -Dhr.regular.username=User1 \
-    -Dhr.regular.password=Pass1 \
+    -Dhr.restapi.url=${REST_API_URL} \
+    -Dhr.website.url=${FRONTEND_URL} \
+    -Dhr.regular.username=${REGULAR_USERNAME} \
+    -Dhr.regular.password=${REGULAR_PASSWORD} \
     -Dtest=RunCukesTest \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
     -Dwebdriver.remote.driver=chrome \
     -Dchrome.switches=\"--proxy-server=$1:8080\" \
-    -Dwebdriver.remote.url=http://zalenium:zalenium1234@zalenium-labs-ci-cd.apps.domino.rht-labs.com/wd/hub \
+    -Dwebdriver.remote.url=http://selenium-hub:4444/wd/hub \
     clean test
