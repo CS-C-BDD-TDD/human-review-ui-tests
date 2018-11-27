@@ -107,7 +107,7 @@ spec:
 
           // Execute the maven command to run Selenium/Serenity tests using CI settings for 
           // Jenkins/OpenShift environment
-          def retVal = sh(returnStatus: true, script: """/opt/rh/rh-maven33/root/usr/bin/mvn clean test -Dhr.restapi.url=\${REST_API_URL} -Dhr.website.url=\${FRONTEND_URL} -Dhr.regular.username=\${REGULAR_PASSWORD} -Dhr.regular.password=\${REGULAR_USERNAME} -Dtest=RunCukesTest -Dwebdriver.remote.driver=chrome -Dwebdriver.remote.url=http://selenium-hub:4444/wd/hub -Dchrome.switches="--proxy-server=http:${localIP}:8080" -Dwebdriver.timeouts.implicitlywait=5000 -Dcukes.config.file=config.properties""")
+          def retVal = sh(returnStatus: true, script: "./run_tests.sh")
 
           // Capture the ZAProxy HTML report - MUST use OTHER prefix
           sh "curl -v -o /tmp/reports/zap-passive-report.html http://localhost:8080/OTHER/core/other/htmlreport"
