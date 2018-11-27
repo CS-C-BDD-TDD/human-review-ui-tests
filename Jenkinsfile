@@ -3,7 +3,7 @@ import groovy.json.JsonSlurper
 pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '50'))
-    timeout(time: 20, unit: 'MINUTES')
+    timeout(time: 20, unit: 'MINUTES')                // If the build takes longer than 20 minutes, fail automatically
   } 
   agent {
     kubernetes {
@@ -102,8 +102,6 @@ spec:
             sleep 5
             sh 'curl -s http://localhost:8080/JSON/core/view/mode'
           }
-
-          sh "curl -v -x ${localIP}:8080 \${FRONTEND_URL}"
 
           // Execute the maven command to run Selenium/Serenity tests using CI settings for 
           // Jenkins/OpenShift environment
