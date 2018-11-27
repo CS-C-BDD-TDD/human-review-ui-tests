@@ -69,6 +69,7 @@ spec:
       mountPath: /tmp/reports
     tty: true
     command:
+    - run-jnlp-client
     - zap.sh
     - '-daemon'
     - '-host'
@@ -90,6 +91,14 @@ spec:
     }
   }
   stages {
+/*     stage('Start Zed Attack Proxy') {
+      steps {
+        container('jenkins-slave-zap') {
+          // Start ZAProxy running in the background
+          sh 'nohup uid_entrypoint.sh zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true -config api.addrs.addr.regex=true -config api.addrs.addr.name=.* &'
+        }
+      }
+    } */
     stage('Run Acceptance Tests') {
       steps {
         script {
