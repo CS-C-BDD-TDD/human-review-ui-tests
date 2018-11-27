@@ -1,7 +1,5 @@
 package gov.dhs.nppd.csc.nsd.yellowdog.util;
 
-import java.io.File;
-
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
