@@ -100,7 +100,7 @@ spec:
           // If ZAProxy is not up in 50 seconds, fail the build
           retry(10) {
             sleep 5
-            sh 'curl -v http://localhost:8080/JSON/core/view/mode'
+            sh 'curl -s http://localhost:8080/JSON/core/view/mode'
           }
 
           // Execute the maven command to run Selenium/Serenity tests using CI settings for 
