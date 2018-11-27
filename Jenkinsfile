@@ -68,6 +68,8 @@ spec:
     - name: reports-storage
       mountPath: /tmp/reports
     tty: true
+    command:
+    - cat
     env:
     - name: MY_POD_IP
       valueFrom:
@@ -81,10 +83,11 @@ spec:
       steps {
         container('jenkins-slave-zap') {
           // Start ZAProxy running in the background
+          sh 'generate_container_user'
           sh 'nohup zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true -config api.addrs.addr.regex=true -config api.addrs.addr.name=.* &'
         }
       }
-    }
+    } 
     stage('Run Acceptance Tests') {
       steps {
         script {
