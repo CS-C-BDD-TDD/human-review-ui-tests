@@ -8,6 +8,7 @@ mvn \
     -Dhr.website.url=${FRONTEND_URL} \
     -Dhr.regular.username=${REGULAR_USERNAME} \
     -Dhr.regular.password=${REGULAR_PASSWORD} \
+    -Dhr.partnerapi.url=${PARTNER_API_URL} \
     -Dtest=RunCukesTest \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
