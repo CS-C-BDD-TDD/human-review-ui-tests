@@ -8,6 +8,8 @@ mvn \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
     -Dwebdriver.remote.driver=chrome \
-    -Dchrome.switches=\"--proxy-server=$1:8080\" \
     -Dwebdriver.remote.url=http://selenium-hub:4444/wd/hub \
     clean test
+
+
+    # -Dchrome.switches=\"--proxy-server=$1:8080\" \
