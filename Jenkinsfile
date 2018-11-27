@@ -57,6 +57,11 @@ spec:
         configMapKeyRef:
           name: build-config
           key: rest_api_url
+    - name: PARTNER_API_URL
+      valueFrom:
+        configMapKeyRef:
+          name: build-config
+          key: partner_api_url
     - name: FRONTEND_URL
       valueFrom:
         configMapKeyRef:
