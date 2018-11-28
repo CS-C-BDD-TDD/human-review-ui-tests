@@ -62,7 +62,7 @@ spec:
                     -Dhr.regular.password=Pass1 \
                     -Dhr.webdriver.maxpage=yes \
                     -Dtest=RunCukesTest \
-                    -Dwebdriver.timeouts.implicitlywait=5000 \
+                    -Dwebdriver.timeouts.implicitlywait=15000 \
                     -Dcukes.config.file=config.properties \
                     -Dwebdriver.remote.driver=chrome \
                     -Dwebdriver.remote.url=http://selenium-hub-labs-test.apps.domino.rht-labs.com/wd/hub \
