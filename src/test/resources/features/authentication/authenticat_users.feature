@@ -4,6 +4,7 @@ Feature: Authenticate users
 	I want to access the Yellow Dog application using secure credential
 	So that I can perform my work securely.
 	
+
 Scenario: Authenticate user to the Yellow Dog application 
 	Given I am a regular user of the Yellow Dog Application with a valid credential 
 	When I login to the website 
