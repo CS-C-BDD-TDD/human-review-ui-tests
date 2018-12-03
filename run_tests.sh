@@ -9,6 +9,7 @@ mvn \
     -Dhr.regular.username=${REGULAR_USERNAME} \
     -Dhr.regular.password=${REGULAR_PASSWORD} \
     -Dhr.partnerapi.url=${PARTNER_API_URL} \
+    -Dhr.webdriver.maxpage=Yes \
     -Dtest=RunCukesTest \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
@@ -17,5 +18,6 @@ mvn \
     -Dwebdriver.remote.url=http://selenium-hub:4444/wd/hub \
     clean test
 
+mvn -DskipTests verify
 
     # -Dchrome.switches=\"--proxy-server=$1:8080\" \
