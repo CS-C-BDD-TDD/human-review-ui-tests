@@ -112,6 +112,15 @@ spec:
           // Jenkins/OpenShift environment
           def retVal = sh(returnStatus: true, script: "./run_tests.sh ${localIP}")
 
+          publishHTML(target: [
+                      	reportDir             : 'target/site/serenity',
+                        reportFiles           : 'index.html',
+                        reportName            : 'AA Test Report',
+                        keepAll               : true,
+                        alwaysLinkToLastBuild : true,
+                        allowMissing          : true
+          ])
+          
           // Capture the ZAProxy HTML report - MUST use OTHER prefix
           sh "curl -v -o /tmp/reports/zap-passive-report.html http://localhost:8080/OTHER/core/other/htmlreport"
 
