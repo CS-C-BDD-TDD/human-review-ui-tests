@@ -112,7 +112,7 @@ spec:
           // Jenkins/OpenShift environment
           def retVal = sh(returnStatus: true, script: "./run_tests.sh ${localIP}")
           
-          sh 'mvn -DskipTests verify'
+          sh '/opt/rh/rh-maven33/root/usr/bin/mvn -DskipTests verify'
           
           publishHTML(target: [
                       	reportDir             : 'target/site/serenity',
