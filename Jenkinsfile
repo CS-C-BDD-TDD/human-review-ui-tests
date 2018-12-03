@@ -111,7 +111,8 @@ spec:
           // Execute the maven command to run Selenium/Serenity tests using CI settings for 
           // Jenkins/OpenShift environment
           def retVal = sh(returnStatus: true, script: "./run_tests.sh ${localIP}")
-          sh "mvn -DskipTests verify"
+          
+          sh 'mvn -DskipTests verify'
           
           publishHTML(target: [
                       	reportDir             : 'target/site/serenity',
