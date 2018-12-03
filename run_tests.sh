@@ -9,7 +9,6 @@ mvn \
     -Dhr.regular.username=${REGULAR_USERNAME} \
     -Dhr.regular.password=${REGULAR_PASSWORD} \
     -Dhr.partnerapi.url=${PARTNER_API_URL} \
-    -Dhr.webdriver.maxpage=Yes \
     -Dtest=RunCukesTest \
     -Dwebdriver.timeouts.implicitlywait=15000 \
     -Dcukes.config.file=config.properties \
