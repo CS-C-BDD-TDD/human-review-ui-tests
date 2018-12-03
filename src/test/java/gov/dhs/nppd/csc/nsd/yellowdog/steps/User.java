@@ -144,11 +144,6 @@ public class User extends ScenarioSteps {
 	}
 
 	@Step
-	public int gets_number_of_fields(String stixId) {
-		return hrPage.getNumberOfFields(stixId);
-	}
-
-	@Step
 	public List<HumanReviewItem> gets_hr_fields(String stixId) {
 		return hrPage.getHrFields(stixId);
 	}
